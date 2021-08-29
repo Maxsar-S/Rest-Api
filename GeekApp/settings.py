@@ -135,3 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     from GeekApp.local_settings import *
 # except ModuleNotFoundError:
 #     print('use global settings')
+
+AUTH_USER_MODEL = 'users.User'

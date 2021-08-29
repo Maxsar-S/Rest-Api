@@ -13,9 +13,8 @@ class Command(BaseCommand):
         count = options['count']
         for i in range(count):
             user = User.objects.create(first_name=f'fname{i}',
+                                       last_name=f'lname{i}',
                                        username=f'uname{i}',
                                        email=f'email{i}',
-                                       last_name=f'lname{i}',
-                                       birthday_year=2000 + i)
+                                       )
             print(f'user {user} created')
-        print('done')
