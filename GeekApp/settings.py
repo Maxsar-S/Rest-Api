@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import rest_framework.permissions
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     #custom apps
     'users',
+    'mainapp',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +146,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ]
+}
