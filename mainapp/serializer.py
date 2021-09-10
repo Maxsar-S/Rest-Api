@@ -14,11 +14,13 @@ class PostSerializer(ModelSerializer):
 
 
 class ArticleSerializer(ModelSerializer):
-    authors = StringRelatedField(many=True)
-    # authors = HyperlinkedRelatedField(view_name='author-detail',
-    #                                   read_only=True,
-    #                                   many=True)
+    author = StringRelatedField()
 
     class Meta:
         model = Article
         fields = '__all__'
+
+
+class ArticleGetSerializer(ArticleSerializer):
+    author = HyperlinkedRelatedField(view_name='author-detail',
+                                      read_only=True,)

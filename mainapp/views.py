@@ -6,13 +6,18 @@ from rest_framework.viewsets import ModelViewSet
 from mainapp.filters import PostFilter
 from mainapp.models import Article, Post
 from mainapp.pagination import LimitOffsetPaginationByTwenty, LimitOffsetPaginationByTen
-from mainapp.serializer import ArticleSerializer, PostSerializer
+from mainapp.serializer import ArticleSerializer, ArticleGetSerializer, PostSerializer
 
 
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
     pagination_class = LimitOffsetPaginationByTen
+    serializer_class = ArticleSerializer
+
+    # def get_serializer_class(self):
+    #     # if self.request.method in ['GET']:
+    #     #     return ArticleGetSerializer
+    #     return ArticleSerializer
 
     def get_queryset(self):
         queryset = Article.objects.all()

@@ -16,8 +16,9 @@ const NotFound404 = ({location}) => {
     )
 }
 
-const API_ROOT = 'http://127.0.0.1:8000/api'
-const get_url = (url_name) => `${API_ROOT}${url_name}`
+const DOMAIN = 'http://127.0.0.1:8000/api'
+const get_url = (url) => `${DOMAIN}${url}`
+
 
 class App extends React.Component {
     constructor(props) {
@@ -30,24 +31,33 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        axios.all(
-            [
-                axios.get(get_url('users')),
-                axios.get(get_url('articles')),
-                axios.get(get_url('posts')),
-            ]
-
-        )
-            .then(axios.spread((users, articles, posts)=>{
+        axios.get(get_url('/users/'))
+            .then(response => {
+                const users = response.data;
                 this.setState(
                     {
-                        'users': users.data.results,
-                        'articles': articles.data.results,
-                        'posts': posts.data.results
+                        'users': users.results
                     }
                 )
-            }))
-            .catch(error => console.log(error))
+            }).catch(error => console.log(error))
+        axios.get(get_url('/articles/'))
+            .then(response => {
+                const articles = response.data;
+                this.setState(
+                    {
+                        'articles': articles.results
+                    }
+                )
+            }).catch(error => console.log(error))
+        axios.get(get_url('/posts/'))
+            .then(response => {
+                const posts = response.data;
+                this.setState(
+                    {
+                        'posts': posts.results
+                    }
+                )
+            }).catch(error => console.log(error))
     }
 
     render() {

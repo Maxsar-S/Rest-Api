@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-f4cv**mws)a&g440z087r$11cb*#-1ppen2d!0qhbn@q#oh56k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 3-d part apps
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',
     # custom apps
     'users',
     'mainapp',
@@ -151,4 +152,12 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
