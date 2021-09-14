@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 
 const PostItem = ({post}) => {
@@ -6,9 +7,17 @@ const PostItem = ({post}) => {
         <tr>
             <td>{post.id}</td>
             <td>{post.name}</td>
-            <td>{post.article}</td>
+            <td>
+                <Link to={`article/${post.article.id}`}>
+                {post.article.name}
+                </Link>
+            </td>
             <td>{post.text}</td>
-            <td>{post.author.first_name}</td>
+            <td>
+                <Link to={`user/${post.author.id}`}>
+                {post.author.first_name}
+                </Link>
+            </td>
             <td>{post.created_at}</td>
             <td>{post.updated_at}</td>
         </tr>

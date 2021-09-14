@@ -12,7 +12,7 @@ from users.serializer import UserModelSerializer, BiographySerializer
 
 
 class UsersViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
-                   mixins.UpdateModelMixin, viewsets.GenericViewSet):
+                   mixins.UpdateModelMixin, viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
 

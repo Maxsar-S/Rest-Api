@@ -1,12 +1,21 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 
 const ArticleItem = ({article}) => {
     return (
         <tr>
             <td>{article.id}</td>
-            <td>{article.name}</td>
-            <td>{article.authors}</td>
+            <td>
+                <Link to={`article/${article.id}`}>
+                {article.name}
+                </Link>
+            </td>
+            <td>
+                <Link to={`user/${article.author.id}`}>
+                    {article.author.first_name} {article.author.last_name}
+                </Link>
+            </td>
         </tr>
     )
 }
@@ -19,7 +28,7 @@ const ArticleList = ({articles}) => {
             <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th>AUHTORS</th>
+                <th>AUTHOR</th>
             </tr>
             </thead>
             <tbody>

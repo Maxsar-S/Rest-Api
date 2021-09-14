@@ -10,9 +10,7 @@ const UserItem = ({user}) => {
                 </Link>
             </td>
             <td>
-                <Link to={`user/${user.id}`}>
                     {user.first_name}
-                </Link>
             </td>
             <td>
                 {user.last_name}

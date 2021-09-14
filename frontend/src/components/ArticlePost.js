@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 
-const ArticleItem = ({item}) => {
+const PostItem = ({item}) => {
     return (
         <tr>
             <td>
@@ -11,6 +11,12 @@ const ArticleItem = ({item}) => {
                 {item.name}
             </td>
             <td>
+                {item.article.name}
+            </td>
+            <td>
+                {item.text}
+            </td>
+            <td>
                 {item.author.first_name} {item.author.last_name}
             </td>
         </tr>
@@ -18,25 +24,27 @@ const ArticleItem = ({item}) => {
 }
 
 
-const AuthorArticleList = ({articles}) => {
+const ArticlePostList = ({posts}) => {
 
 
     let {id} = useParams();
-    let filteredArticles = articles.filter((article) => article.author.id === +id)
+    let filteredPosts = posts.filter((post) => post.id === +id)
     return (
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>NAME</th>
+                    <th>ARTICLE</th>
+                    <th>TEXT</th>
                     <th>AUTHOR</th>
                 </tr>
             </thead>
             <tbody>
-            {filteredArticles.map((article) => <ArticleItem item={article}/>)}
+            {filteredPosts.map((post) => <PostItem item={post}/>)}
             </tbody>
         </table>
     )
 }
 
-export default AuthorArticleList
+export default ArticlePostList

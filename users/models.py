@@ -10,6 +10,10 @@ class User(AbstractUser):
     def __str__(self):
         return f'{self.last_name}, {self.first_name}'
 
+    class Meta:
+        ordering = ['id']
+
+
 class Biography(models.Model):
     text = models.TextField()
     user = models.OneToOneField(User,

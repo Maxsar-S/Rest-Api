@@ -16,6 +16,9 @@ class Article(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['pk']
+
 
 class Post(models.Model):
     name = models.CharField(max_length=32)
@@ -25,3 +28,6 @@ class Post(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['pk']
