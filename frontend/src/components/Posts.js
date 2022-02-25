@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom";
 
 
-const PostItem = ({post}) => {
+const PostItem = ({post, postDelete}) => {
     return (
         <tr>
             <td>{post.id}</td>
@@ -20,13 +20,19 @@ const PostItem = ({post}) => {
             </td>
             <td>{post.created_at}</td>
             <td>{post.updated_at}</td>
+            <td>
+                <button onClick={() => postDelete(post.id)}>
+                    Delete
+                </button>
+            </td>
         </tr>
     )
 }
 
 
-const PostList = ({posts}) => {
+const PostList = ({posts, postDelete}) => {
     return (
+        <div>
         <table>
             <thead>
             <tr>
@@ -37,12 +43,15 @@ const PostList = ({posts}) => {
                 <th>AUHTOR</th>
                 <th>CREATED</th>
                 <th>UPDATED</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            {posts.map((post) => <PostItem key={post.id} post={post}/>)}
+            {posts.map((post) => <PostItem key={post.id} post={post} postDelete={postDelete}/>)}
             </tbody>
         </table>
+        <Link to='/posts/create'>New post</Link>
+        </div>
     )
 }
 

@@ -1,4 +1,3 @@
-from rest_framework.relations import HyperlinkedRelatedField, StringRelatedField
 from rest_framework.serializers import ModelSerializer
 
 from users.serializer import UserModelSerializer

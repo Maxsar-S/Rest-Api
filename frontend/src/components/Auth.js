@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
 
 
     handlerOnChange(event) {
-        // console.log(event.target);
+        console.log(event.target);
         this.setState({
             [event.target.name]: event.target.value
         })

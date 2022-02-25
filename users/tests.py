@@ -66,8 +66,7 @@ class TestUserViewSet(TestCase):
             self.user_data,
             format='json'
         )
-        admin = User.objects.create_superuser('admin', 'admin@admin.com', 'admin123456')
-        force_authenticate(request, admin)
+        force_authenticate(request, self.superuser)
         view = UsersViewSet.as_view({'post': 'create'})
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -80,7 +79,7 @@ class TestUserViewSet(TestCase):
             self.user_data,
             format='json'
         )
-        force_authenticate(request, user=self.superuser)
+        force_authenticate(request, self.superuser)
         view = UsersViewSet.as_view({'post': 'create'})
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -90,7 +89,7 @@ class TestUserViewSet(TestCase):
         user = User.objects.create(**self.user_data)
         client = APIClient()
         response = client.get(f'/api/users/{user.id}/')
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_detail_user(self):
         # 4. APIClient
@@ -104,12 +103,14 @@ class TestUserViewSet(TestCase):
         # 6.
         user = User.objects.create(**self.user_data)
         client = APIClient()
-        client.login(username='django', password='geekbrains')
-        response = client.put(f'/api/users/{user.id}/',
+        client.force_login(user=self.superuser)
+        # response = client.put(f'/api/users/{user.id}/',
+        #                       self.user_data_upd)
+        response = client.patch(f'/api/users/{user.id}/',
                               self.user_data_upd)
+        response.render()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         user = User.objects.get(id=user.id)
         self.assertEqual(user.first_name, self.user_data_upd['first_name'])
         self.assertEqual(user.last_name, self.user_data_upd['last_name'])
-        self.assertEqual(user.birthday_year, self.user_data_upd['birthday_year'])
         client.logout()
