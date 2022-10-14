@@ -1,3 +1,3 @@
-Сайт реализованный на Django Rest Framework и JavaScript React.
+Website implemented on Django Rest Framework and JavaScript React.
 
-Для тестирования использовались Swagger и GraphQl
+Swagger and GraphQl were used for testing
